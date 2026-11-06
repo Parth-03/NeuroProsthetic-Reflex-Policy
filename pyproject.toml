@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reflex-residual-rl"
+version = "0.1.0"
+description = "Spinal-reflex controller with a learned RL residual, pain and protective withdrawal on a MyoSuite elbow"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Parth Goel" }]
+dependencies = [
+    "mujoco>=2.3.6",
+    "myosuite",
+    "gymnasium",
+    "stable-baselines3[extra]",
+    "numpy",
+    "matplotlib",
+    "imageio[ffmpeg]",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["reflexrl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
