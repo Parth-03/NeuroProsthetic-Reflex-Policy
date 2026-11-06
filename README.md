@@ -4,10 +4,6 @@ A hand-designed **spinal stretch reflex** controls a six-muscle elbow toward a t
 
 The environment is MyoSuite's `myoElbowPose1D6MRandom-v0`, simulated in MuJoCo.
 
-<p align="center">
-  <img src="figures/reward_comparison.png" width="48%"> <img src="figures/episode_trace_1.png" width="48%">
-</p>
-
 ## Controller
 
 ```
@@ -51,6 +47,10 @@ During training, pain steps per 100-step episode fell from roughly 60–70 to ro
 </p>
 
 **What the policy learns.** Reflex-only control can get trapped in a pain loop. Withdrawal moves the control target 0.5 rad away, which saturates the reflex at full activation (1.0). That exceeds the 0.9 pain threshold, so pain continues and withdrawal never ends. If the safe target lies beyond the joint's range, the arm stays stuck (the flat segments in the traces above). The learned residual subtracts about 0.2 from the agonists during withdrawal. This holds activation at 0.8, below the threshold, which breaks the loop. Most of the reward gap comes from this learned *pain avoidance*. The unit tests reproduce the mechanism (`test_saturated_reflex_keeps_itself_in_withdrawal`, `test_negative_residual_breaks_the_pain_loop`).
+
+<p align="center">
+  <img src="figures/reward_comparison.png" width="48%"> <img src="figures/episode_trace_1.png" width="48%">
+</p>
 
 ## Repository layout
 
